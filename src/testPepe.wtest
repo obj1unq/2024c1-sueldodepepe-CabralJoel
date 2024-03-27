@@ -15,5 +15,42 @@ describe "Sueldo Pepe" {
 		pepe.presentismo(normal)
 		assert.equals(20800, pepe.sueldo())
 	}
-	
+	test "pepe gerente con bono porcentual y bono nulo"{
+		pepe.categoria(gerente)
+		pepe.bonoResultado(porcentaje)
+		pepe.presentismo(presentismoNulo)
+		assert.equals(16500, pepe.sueldo())
+	}
+	test "pepe cadete con bono porcentual y precentismo normal sin faltas"{
+		pepe.categoria(cadete)
+		pepe.bonoResultado(porcentaje)
+		pepe.presentismo(normal)
+		assert.equals(24000, pepe.sueldo())
+	}
+	test "pepe cadete con bono porcentual y presentismo normal y 1 falta"{
+		pepe.categoria(cadete)
+		pepe.sumarFaltas(1)
+		pepe.bonoResultado(porcentaje)
+		pepe.presentismo(normal)
+		assert.equals(23000, pepe.sueldo())
+	}
+	test "pepe vendedor, bono fijo, presentismo nulo y aumento de ventas"{
+		vendedor.activarAumentoPorMuchasVentas()
+		pepe.categoria(vendedor)
+		pepe.bonoResultado(fijo)
+		pepe.presentismo(presentismoNulo)
+		assert.equals(20800, pepe.sueldo())
+	}
+	test "pepe cadete y  roque y ernesto"{
+		pepe.categoria(medioTiempo)
+		pepe.sumarFaltas(1)
+		pepe.bonoResultado(porcentaje)
+		pepe.presentismo(demagogico)
+		roque.bonoResultado(fijo)
+		ernesto.companiero(pepe)
+		ernesto.presentismo(ajuste)
+		assert.equals(11500, pepe.sueldo())
+		assert.equals(37800, roque.sueldo())
+		assert.equals(10100, ernesto.sueldo())
+	}
 }
